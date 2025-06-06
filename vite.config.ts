@@ -15,18 +15,30 @@ export default defineConfig({
     lib: {
       entry: "src/index.tsx",
       name: "Halo",
-      formats: ["es", "umd"],
+      formats: ["es"],
       fileName: (format: string) => `index.${format}.js`,
     },
+    minify: false,
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: [
+        "react",
+        "react-dom",
+        "react-router-dom",
+      ],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "react-router-dom": "ReactRouterDOM",
         },
+        compact: false,
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js",
       },
     },
+    sourcemap: false,
   },
   css: {
     postcss: {
